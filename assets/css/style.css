@@ -9,7 +9,7 @@
 }
 
 body {
-    background: #ECE9F5;
+    background: #e6e6e6;
     overflow: hidden;
     height: 100vh;
 }
@@ -31,7 +31,7 @@ LEFT PANEL
 .left-panel {
     width: 52%;
     height: 100%;
-    background: linear-gradient(135deg, #17073B 0%, #2A1268 45%, #4B1FA3 100%);
+    background: linear-gradient(135deg, #2f1e50 0%, #543b67 45%, #7c4293 100%);
     position: relative;
     padding: 4vh 4vw;
     display: flex;
@@ -70,7 +70,7 @@ LEFT PANEL
 
 .graduation {
     font-size: clamp(40px, 5vw, 70px);
-    color: #8F56FF;
+    color: #7c4293;
     margin-bottom: 0.5vh;
     line-height: 1;
 }
@@ -83,7 +83,7 @@ LEFT PANEL
 }
 
 .hero span {
-    color: #9B5CFF;
+    color: #7c4293;
 }
 
 .line {
@@ -98,7 +98,7 @@ LEFT PANEL
 .circle {
     width: 8px;
     height: 8px;
-    background: #9D5FFF;
+    background: #7c4293;
     border-radius: 50%;
     position: absolute;
     right: 0;
@@ -132,7 +132,7 @@ FEATURES
 .feature i {
     font-size: clamp(18px, 2vw, 28px);
     margin-bottom: 0.5vh;
-    color: #C38FFF;
+    color: #b99ac8;
 }
 
 .feature h3 {
@@ -164,7 +164,7 @@ BOTTOM CARD
 
 .shield {
     font-size: clamp(16px, 1.8vw, 24px);
-    color: #B37CFF;
+    color: #b99ac8;
     flex-shrink: 0;
 }
 
@@ -201,30 +201,11 @@ DOTS
 }
 
 /*=================================
-CURVE SVG
-=================================*/
-.curve {
-    position: absolute;
-    left: 48%;
-    top: 0;
-    width: clamp(120px, 18vw, 240px);
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-    transform: translateX(-50%);
-}
-
-.curve svg {
-    height: 100%;
-    width: 100%;
-}
-
-/*=================================
 RIGHT PANEL
 =================================*/
 .right-panel {
     width: 48%;
-    background: #F7F5FC;
+    background: #e6e6e6;
     position: relative;
     display: flex;
     justify-content: center;
@@ -261,7 +242,7 @@ LOGIN CARD
 .login-card h2 {
     font-size: clamp(18px, 1.8vw, 24px);
     text-align: center;
-    color: #25114E;
+    color: #2f1e50;
     font-weight: 600;
 }
 
@@ -269,13 +250,13 @@ LOGIN CARD
     text-align: center;
     font-size: clamp(30px, 4vw, 52px);
     font-weight: 700;
-    color: #241049;
+    color: #2f1e50;
     margin-bottom: 1vh;
     line-height: 1.1;
 }
 
 .login-card h1 span {
-    color: #8E58FF;
+    color: #7c4293;
 }
 
 .small-line {
@@ -289,21 +270,21 @@ LOGIN CARD
 .small-line div {
     width: clamp(60px, 8vw, 100px);
     height: 2px;
-    background: #DDD;
+    background: #cccccb;
 }
 
 .dot {
     width: 10px !important;
     height: 10px !important;
     border-radius: 50%;
-    background: #9A5BFF !important;
+    background: #7c4293 !important;
 }
 
 .login-card > p {
     text-align: center;
     font-size: clamp(13px, 1.3vw, 18px);
     font-weight: 300;
-    color: #6B6490;
+    color: #2e2e2e;
     margin-bottom: 2vh;
 }
 
@@ -315,12 +296,12 @@ label {
     font-size: clamp(13px, 1.1vw, 16px);
     margin-bottom: 0.5vh;
     font-weight: 500;
-    color: #26114D;
+    color: #2f1e50;
 }
 
 .input-group {
     height: clamp(44px, 4vh, 54px);
-    border: 2px solid #ECE8F7;
+    border: 2px solid #cccccb;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -330,7 +311,7 @@ label {
 
 .input-group i {
     font-size: clamp(14px, 1.1vw, 18px);
-    color: #8A7AA9;
+    color: #2e2e2e;
 }
 
 .input-group input {
@@ -349,7 +330,7 @@ label {
 
 a {
     text-decoration: none;
-    color: #7C55E8;
+    color: #7c4293;
 }
 
 /*=================================
@@ -360,7 +341,7 @@ BUTTON LOGIN
     height: clamp(46px, 4.5vh, 56px);
     border: none;
     border-radius: 12px;
-    background: linear-gradient(90deg, #A05BFF, #5A23C7);
+    background: linear-gradient(90deg, #7c4293, #543b67);
     font-size: clamp(15px, 1.2vw, 18px);
     color: white;
     cursor: pointer;
@@ -370,7 +351,7 @@ BUTTON LOGIN
 
 .login-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(125, 75, 255, .4);
+    box-shadow: 0 10px 30px rgba(124, 66, 147, .4);
 }
 
 .login-btn i {
@@ -383,13 +364,13 @@ REGISTER LINK
 .register-link {
     text-align: center;
     font-size: clamp(12px, 1vw, 15px);
-    color: #6B6490;
+    color: #2e2e2e;
     margin-top: 2vh;
 }
 
 .register-link a {
     display: inline;
-    color: #7C55E8;
+    color: #7c4293;
     font-weight: 600;
 }
 
@@ -399,7 +380,7 @@ BOTTOM TEXT
 .secure {
     margin-top: 2vh;
     font-size: clamp(11px, 0.9vw, 14px);
-    color: #7C72A5;
+    color: #2e2e2e;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -408,7 +389,7 @@ BOTTOM TEXT
 }
 
 .secure i {
-    color: #9A5BFF;
+    color: #7c4293;
 }
 
 /*=================================
@@ -430,10 +411,6 @@ RESPONSIVE
 
     .right-panel {
         width: 60%;
-    }
-
-    .curve {
-        display: none;
     }
 
     .hero h1 {
@@ -506,16 +483,16 @@ RESPONSIVE
         gap: 8px;
         font-size: 24px;
         font-weight: 700;
-        color: #241049;
+        color: #2f1e50;
     }
 
     .mobile-brand i {
         font-size: 26px;
-        color: #8E58FF;
+        color: #7c4293;
     }
 
     .mobile-brand span {
-        color: #8E58FF;
+        color: #7c4293;
     }
 
     .mobile-footer {
@@ -532,12 +509,12 @@ RESPONSIVE
         padding: 8px 14px;
         border: 1px solid rgba(255, 255, 255, .15);
         border-radius: 10px;
-        background: linear-gradient(135deg, #17073B 0%, #2A1268 45%, #4B1FA3 100%);
+        background: linear-gradient(135deg, #2f1e50 0%, #543b67 45%, #7c4293 100%);
     }
 
     .mobile-footer-content i {
         font-size: 16px;
-        color: #B37CFF;
+        color: #b99ac8;
     }
 
     .mobile-footer-content p {

@@ -63,11 +63,6 @@
     </div>
   </div>
 
-  <div class="curve">
-    <svg viewBox="0 0 200 1200">
-      <path fill="#F7F5FC" d="M0 0 C180 250, 180 950, 0 1200 L200 1200 L200 0 Z"/>
-    </svg>
-  </div>
 
   <div class="right-panel">
     <div class="dots top-right"></div>
