@@ -100,7 +100,7 @@ CREATE TABLE `resultados_afi_estudiante` (
   `materia_id` int(11) NOT NULL,
   `semestre_id` int(11) NOT NULL,
   `promedio` decimal(5,2) DEFAULT NULL,
-  `estatus` enum('cursando','aprobado','reprobado') NOT NULL DEFAULT 'cursando',
+  `estatus` varchar(20) NOT NULL,
   `observaciones` text DEFAULT NULL,
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
@@ -108,6 +108,9 @@ CREATE TABLE `resultados_afi_estudiante` (
   KEY `materia_id` (`materia_id`),
   KEY `semestre_id` (`semestre_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `inscripciones_afi` MODIFY `estatus` varchar(20) NOT NULL;
+ALTER TABLE `resultados_afi_estudiante` MODIFY `estatus` varchar(20) NOT NULL;
 
 ALTER TABLE `materias` ADD CONSTRAINT `materias_semestre_fk` FOREIGN KEY (`semestre_id`) REFERENCES `semestres` (`id`);
 ALTER TABLE `afis_materia` ADD CONSTRAINT `afm_afi_fk` FOREIGN KEY (`afi_id`) REFERENCES `afis` (`id`);
@@ -134,3 +137,4 @@ CREATE TABLE `inscripciones_afi` (
 
 ALTER TABLE `inscripciones_afi` ADD CONSTRAINT `insc_usuario_fk` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
 ALTER TABLE `inscripciones_afi` ADD CONSTRAINT `insc_afi_materia_fk` FOREIGN KEY (`afi_materia_id`) REFERENCES `afis_materia` (`id`);
+
