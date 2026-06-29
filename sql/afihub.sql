@@ -3,6 +3,7 @@ USE `afihub`;
 
 DROP TABLE IF EXISTS `resultados_afi_estudiante`;
 DROP TABLE IF EXISTS `resultados_afi_encuesta`;
+DROP TABLE IF EXISTS `inscripciones_afi`;
 DROP TABLE IF EXISTS `tests`;
 DROP TABLE IF EXISTS `afis_materia`;
 DROP TABLE IF EXISTS `afis`;
@@ -119,4 +120,17 @@ ALTER TABLE `resultados_afi_encuesta` ADD CONSTRAINT `rae_afi_materia_fk` FOREIG
 ALTER TABLE `resultados_afi_estudiante` ADD CONSTRAINT `raest_usuario_fk` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
 ALTER TABLE `resultados_afi_estudiante` ADD CONSTRAINT `raest_materia_fk` FOREIGN KEY (`materia_id`) REFERENCES `materias` (`id`);
 ALTER TABLE `resultados_afi_estudiante` ADD CONSTRAINT `raest_semestre_fk` FOREIGN KEY (`semestre_id`) REFERENCES `semestres` (`id`);
-COMMIT;
+
+CREATE TABLE `inscripciones_afi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` int(11) NOT NULL,
+  `afi_materia_id` int(11) NOT NULL,
+  `estatus` varchar(20) NOT NULL DEFAULT 'inscrito',
+  `fecha_inscripcion` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`),
+  KEY `afi_materia_id` (`afi_materia_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `inscripciones_afi` ADD CONSTRAINT `insc_usuario_fk` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
+ALTER TABLE `inscripciones_afi` ADD CONSTRAINT `insc_afi_materia_fk` FOREIGN KEY (`afi_materia_id`) REFERENCES `afis_materia` (`id`);
