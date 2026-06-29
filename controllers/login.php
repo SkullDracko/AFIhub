@@ -34,7 +34,7 @@ if (!empty($errors)) {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT id, matricula, nombre, apellidop, apellidom, semestre FROM usuarios WHERE matricula = :matricula AND institutional_email = :correo LIMIT 1");
+    $stmt = $pdo->prepare("SELECT id, matricula, nombre, apellidop, apellidom, institutional_email, personal_email, cell, semestre FROM usuarios WHERE matricula = :matricula AND institutional_email = :correo LIMIT 1");
     $stmt->execute([':matricula' => $matricula, ':correo' => $correo]);
     $user = $stmt->fetch();
 
@@ -49,6 +49,9 @@ try {
     $_SESSION['nombre'] = $user['nombre'];
     $_SESSION['apellidop'] = $user['apellidop'];
     $_SESSION['apellidom'] = $user['apellidom'];
+    $_SESSION['institutional_email'] = $user['institutional_email'];
+    $_SESSION['personal_email'] = $user['personal_email'];
+    $_SESSION['cell'] = $user['cell'];
     $_SESSION['semestre'] = $user['semestre'];
 
     echo json_encode(['success' => true, 'redirect' => 'dashboard.php']);
