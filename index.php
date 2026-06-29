@@ -68,6 +68,7 @@
     <div class="dots top-right"></div>
     <div class="dots bottom-right"></div>
 
+    <div class="panel-content">
     <div class="mobile-header">
       <div class="mobile-logos">
         <img src="assets/img/facmed.png" alt="FacMed">
@@ -92,25 +93,31 @@
 
       <p>Inicia sesión para continuar</p>
 
+      <div class="general-error" id="login-general-error"></div>
+
+      <form id="loginForm">
       <label for="matricula">Matrícula</label>
-      <div class="input-group">
+      <div class="input-group" id="ig-matricula">
         <i class="fa-regular fa-user"></i>
-        <input type="text" id="matricula" inputmode="numeric" placeholder="Ingresa tu matrícula" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        <input type="text" id="matricula" name="matricula" inputmode="numeric" placeholder="Ingresa tu matrícula" oninput="this.value = this.value.replace(/[^0-9]/g, '')" autocomplete="off">
       </div>
+      <span class="error-msg" id="err-matricula"></span>
 
       <label for="correo">Correo universitario</label>
-      <div class="input-group">
+      <div class="input-group" id="ig-correo">
         <i class="fa-regular fa-envelope"></i>
-        <input type="email" id="correo" placeholder="Ingresa tu correo">
+        <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" autocomplete="off">
       </div>
+      <span class="error-msg" id="err-correo"></span>
 
-      <button class="login-btn">
+      <button type="submit" class="login-btn">
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
         Iniciar sesión
       </button>
+      </form>
 
       <p class="register-link">
-        ¿No tienes cuenta? <a href="#">Regístrate</a>
+        ¿No tienes cuenta? <a href="views/auth/register.php">Regístrate</a>
       </p>
     </div>
 
@@ -127,6 +134,7 @@
     <div class="secure">
       <i class="fa-solid fa-shield"></i>
       Sistema seguro de la Facultad de Medicina, UANL
+    </div>
     </div>
   </div>
 
