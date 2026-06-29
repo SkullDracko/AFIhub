@@ -57,7 +57,172 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function renderProgreso() {
+    const container = document.getElementById("progresoContent");
+
+    const completados = areasData.flatMap(a => a.afis).filter(a => a.estado === "completado");
+    const totalAFIs = 2;
+    const completadosCount = completados.length;
+
+    container.innerHTML = `
+      <div class="progreso-grid">
+        <div class="perfil-card stats-card">
+          <h3><i class="fa-solid fa-chart-simple"></i> Mi progreso</h3>
+          <div class="stats-circle">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#e6e6e6" stroke-width="10"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#7c4293" stroke-width="10"
+                stroke-dasharray="${2 * Math.PI * 52}"
+                stroke-dashoffset="${2 * Math.PI * 52 * (1 - completadosCount / totalAFIs)}"
+                stroke-linecap="round" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="stats-circle-text">
+              <span class="stats-num">${completadosCount}</span>
+              <span>de ${totalAFIs}</span>
+            </div>
+          </div>
+          <p class="stats-label">AFIs completados este semestre</p>
+        </div>
+
+        <div class="perfil-card historial-card">
+          <h3><i class="fa-solid fa-clock-rotate-left"></i> Historial</h3>
+          ${completados.length === 0
+            ? '<p class="historial-empty">Aún no completas ningún AFI.</p>'
+            : `<div class="historial-list">
+                ${completados.map(a => `
+                  <div class="historial-item">
+                    <div>
+                      <span class="historial-nombre">${a.nombre}</span>
+                      <span class="historial-fecha">${a.fecha}</span>
+                    </div>
+                    <span class="historial-calif">Aprobado</span>
+                  </div>
+                `).join("")}
+              </div>`
+          }
+        </div>
+      </div>
+    `;
+  }
+
+  function renderPerfil() {
+    const container = document.getElementById("perfilContent");
+
+    const notifsOn = localStorage.getItem("notif_afihub") !== "off";
+
+    container.innerHTML = `
+      <div class="perfil-grid">
+
+        <div class="perfil-card datos-card">
+          <h3><i class="fa-solid fa-id-card"></i> Datos personales</h3>
+          <div class="datos-row"><span class="datos-label">Matrícula</span><span class="datos-value">${USER_DATA.matricula}</span></div>
+          <div class="datos-row"><span class="datos-label">Nombre</span><span class="datos-value">${USER_DATA.nombre} ${USER_DATA.apellidop} ${USER_DATA.apellidom}</span></div>
+          <div class="datos-row"><span class="datos-label">Correo institucional</span><span class="datos-value">correo@uanl.edu.mx</span></div>
+          <div class="datos-row"><span class="datos-label">Correo personal</span><span class="datos-value" id="perfilCorreoPersonal">correo@gmail.com</span></div>
+          <div class="datos-row"><span class="datos-label">Celular</span><span class="datos-value" id="perfilCelular">1234567890</span></div>
+          <div class="datos-row"><span class="datos-label">Semestre</span><span class="datos-value">${USER_DATA.semestre}°</span></div>
+        </div>
+
+        <div class="perfil-card notifs-card">
+          <h3><i class="fa-solid fa-bell"></i> Notificaciones</h3>
+          <div class="toggle-row">
+            <span>Recibir recordatorios por correo</span>
+            <label class="toggle">
+              <input type="checkbox" id="notifToggle" ${notifsOn ? "checked" : ""}>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <p class="toggle-desc">${notifsOn ? "Recibirás avisos antes de cada AFI." : "No recibirás recordatorios por correo."}</p>
+        </div>
+
+        <div class="perfil-card editar-card">
+          <h3><i class="fa-solid fa-pen"></i> Editar perfil</h3>
+          <div class="edit-field">
+            <label>Correo personal</label>
+            <div class="edit-input-group">
+              <input type="email" id="editEmail" value="correo@gmail.com">
+              <button class="edit-save-btn" id="saveEmail"><i class="fa-solid fa-check"></i></button>
+            </div>
+          </div>
+          <div class="edit-field">
+            <label>Celular</label>
+            <div class="edit-input-group">
+              <input type="tel" id="editCell" value="1234567890" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+              <button class="edit-save-btn" id="saveCell"><i class="fa-solid fa-check"></i></button>
+            </div>
+          </div>
+          <div class="edit-field">
+            <label>Semestre</label>
+            <div class="edit-input-group">
+              <select id="editSemestre">
+                ${[1,2,3,4,5,6,7,8,9,10,11,12].map(s =>
+                  `<option value="${s}" ${s === USER_DATA.semestre ? "selected" : ""}>${s}° Semestre</option>`
+                ).join("")}
+              </select>
+              <button class="edit-save-btn" id="saveSemestre"><i class="fa-solid fa-check"></i></button>
+            </div>
+          </div>
+          <span class="edit-feedback" id="editFeedback"></span>
+        </div>
+
+      </div>
+    `;
+
+    document.getElementById("notifToggle").addEventListener("change", function () {
+      localStorage.setItem("notif_afihub", this.checked ? "on" : "off");
+      document.querySelector(".toggle-desc").textContent = this.checked
+        ? "Recibirás avisos antes de cada AFI."
+        : "No recibirás recordatorios por correo.";
+    });
+
+    document.getElementById("saveEmail").addEventListener("click", () => {
+      const val = document.getElementById("editEmail").value.trim();
+      if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        showEditFeedback("Ingresa un correo válido", "error");
+        return;
+      }
+      document.getElementById("perfilCorreoPersonal").textContent = val;
+      showEditFeedback("Correo actualizado", "ok");
+    });
+
+    document.getElementById("saveCell").addEventListener("click", () => {
+      const val = document.getElementById("editCell").value;
+      if (val.length !== 10) {
+        showEditFeedback("El celular debe tener 10 dígitos", "error");
+        return;
+      }
+      document.getElementById("perfilCelular").textContent = val;
+      showEditFeedback("Celular actualizado", "ok");
+    });
+
+    document.getElementById("saveSemestre").addEventListener("click", () => {
+      const val = parseInt(document.getElementById("editSemestre").value);
+      USER_DATA.semestre = val;
+      document.querySelectorAll(".datos-row").forEach(row => {
+        if (row.querySelector(".datos-label")?.textContent === "Semestre") {
+          row.querySelector(".datos-value").textContent = val + "°";
+        }
+      });
+      document.querySelector(".dash-semestre").textContent = "Semestre " + val;
+      showEditFeedback("Semestre actualizado", "ok");
+    });
+  }
+
+  function showEditFeedback(msg, type) {
+    const el = document.getElementById("editFeedback");
+    el.textContent = msg;
+    el.className = "edit-feedback visible " + type;
+    setTimeout(() => el.classList.remove("visible"), 3000);
+  }
+
   renderAreas();
+  renderProgreso();
+  renderPerfil();
+
+  const supportBtn = document.getElementById("supportBtn");
+  supportBtn.addEventListener("click", () => {
+    alert("¿Tienes dudas? Contacta a tu tutor o escribe a soporte@afihub.uanl.mx");
+  });
 
   const tabs = document.querySelectorAll(".tab-btn");
   const panels = {

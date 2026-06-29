@@ -1359,6 +1359,318 @@ AFI DETAIL
     font-size: clamp(14px, 1vw, 16px);
 }
 
+/*=================================
+SUPPORT BTN
+=================================*/
+.support-btn {
+    background: none;
+    border: none;
+    font-size: clamp(18px, 1.4vw, 22px);
+    color: #b99ac8;
+    cursor: pointer;
+    transition: color .25s;
+    margin: 0 4px;
+    padding: 4px;
+}
+
+.support-btn:hover {
+    color: #7c4293;
+}
+
+/*=================================
+PERFIL
+=================================*/
+.perfil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5vw;
+}
+
+.perfil-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5vh 1.8vw;
+    box-shadow: 0 2px 12px rgba(47, 30, 80, .06);
+}
+
+.perfil-card h3 {
+    font-size: clamp(15px, 1.1vw, 18px);
+    color: #2f1e50;
+    margin-bottom: 1.5vh;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.perfil-card h3 i {
+    color: #7c4293;
+}
+
+.datos-card {
+    grid-row: span 2;
+}
+
+.datos-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8vh 0;
+    border-bottom: 1px solid #f0ecf5;
+}
+
+.datos-row:last-child {
+    border-bottom: none;
+}
+
+.datos-label {
+    font-size: clamp(12px, 0.85vw, 14px);
+    color: #b99ac8;
+    font-weight: 500;
+}
+
+.datos-value {
+    font-size: clamp(13px, 0.9vw, 15px);
+    color: #2f1e50;
+    font-weight: 500;
+    text-align: right;
+}
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1vw;
+}
+
+.toggle-row span {
+    font-size: clamp(13px, 0.9vw, 15px);
+    color: #2e2e2e;
+}
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #cccccb;
+    border-radius: 24px;
+    transition: .3s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.toggle input:checked + .slider {
+    background: #7c4293;
+}
+
+.toggle input:checked + .slider::before {
+    transform: translateX(20px);
+}
+
+.toggle-desc {
+    font-size: clamp(11px, 0.8vw, 13px);
+    color: #b99ac8;
+    margin-top: 1vh;
+}
+
+.edit-field {
+    margin-bottom: 1.5vh;
+}
+
+.edit-field label {
+    font-size: clamp(12px, 0.85vw, 14px);
+    color: #b99ac8;
+    margin-bottom: 0.3vh;
+}
+
+.edit-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-input-group input {
+    flex: 1;
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: clamp(13px, 0.9vw, 15px);
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color .25s;
+}
+
+.edit-input-group input:focus,
+.edit-input-group select:focus {
+    border-color: #7c4293;
+}
+
+.edit-input-group select {
+    flex: 1;
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: clamp(13px, 0.9vw, 15px);
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    background: white;
+    cursor: pointer;
+    transition: border-color .25s;
+    color: #2f1e50;
+}
+
+.edit-save-btn {
+    background: #2f1e50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 38px;
+    cursor: pointer;
+    transition: background .25s;
+}
+
+.edit-save-btn:hover {
+    background: #7c4293;
+}
+
+.edit-feedback {
+    display: none;
+    font-size: clamp(12px, 0.85vw, 14px);
+    margin-top: 0.5vh;
+}
+
+.edit-feedback.visible {
+    display: block;
+}
+
+.edit-feedback.ok {
+    color: #27ae60;
+}
+
+.edit-feedback.error {
+    color: #e74c3c;
+}
+
+.progreso-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5vw;
+}
+
+.stats-card {
+    text-align: center;
+}
+
+.stats-circle {
+    position: relative;
+    width: 130px;
+    margin: 0 auto 1vh;
+}
+
+.stats-circle svg {
+    width: 100%;
+    height: auto;
+}
+
+.stats-circle-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-num {
+    font-size: clamp(28px, 2.5vw, 36px);
+    font-weight: 700;
+    color: #2f1e50;
+    line-height: 1;
+}
+
+.stats-circle-text span:last-child {
+    font-size: clamp(11px, 0.8vw, 13px);
+    color: #b99ac8;
+}
+
+.stats-label {
+    font-size: clamp(12px, 0.85vw, 14px);
+    color: #2e2e2e;
+    font-weight: 300;
+}
+
+.historial-card {
+    grid-column: span 2;
+}
+
+.historial-empty {
+    color: #b99ac8;
+    font-size: clamp(13px, 0.9vw, 15px);
+    font-style: italic;
+    text-align: center;
+    padding: 2vh 0;
+}
+
+.historial-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.historial-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh 0;
+    border-bottom: 1px solid #f0ecf5;
+}
+
+.historial-item:last-child {
+    border-bottom: none;
+}
+
+.historial-nombre {
+    display: block;
+    font-size: clamp(13px, 0.9vw, 15px);
+    color: #2f1e50;
+    font-weight: 500;
+}
+
+.historial-fecha {
+    font-size: clamp(11px, 0.8vw, 13px);
+    color: #b99ac8;
+}
+
+.historial-calif {
+    font-size: clamp(12px, 0.85vw, 14px);
+    font-weight: 600;
+    color: #27ae60;
+    background: #e8f5e9;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
 @media (max-width: 900px) {
     .afi-detail-card {
         padding: 2.5vh 4vw;
@@ -1367,5 +1679,22 @@ AFI DETAIL
     .afi-detail-meta {
         flex-direction: column;
         gap: 1.5vh;
+    }
+
+    .perfil-grid,
+    .progreso-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .datos-card {
+        grid-row: auto;
+    }
+
+    .historial-card {
+        grid-column: auto;
+    }
+
+    .perfil-card {
+        padding: 2.5vh 4vw;
     }
 }

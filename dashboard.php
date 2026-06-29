@@ -45,6 +45,7 @@ $semestre = (int)$_SESSION['semestre'];
       <i class="fa-solid fa-circle-user"></i>
       <span class="dash-user-name"><?= htmlspecialchars($nombre . ' ' . $apellidop) ?></span>
       <span class="dash-semestre">Semestre <?= $semestre ?></span>
+      <button class="support-btn" id="supportBtn" title="Soporte"><i class="fa-solid fa-circle-question"></i></button>
       <a href="controllers/logout.php" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
 
@@ -65,23 +66,17 @@ $semestre = (int)$_SESSION['semestre'];
     <section class="tab-panel" id="panel-progreso">
       <div class="panel-header">
         <h1>Mi Progreso</h1>
-        <p>Resumen de tus actividades</p>
+        <p>Resumen de tus actividades y avance</p>
       </div>
-      <div class="progreso-placeholder">
-        <i class="fa-solid fa-chart-line"></i>
-        <p>Aquí verás tu avance en las AFIs</p>
-      </div>
+      <div id="progresoContent"></div>
     </section>
 
     <section class="tab-panel" id="panel-perfil">
       <div class="panel-header">
         <h1>Mi Perfil</h1>
-        <p>Tus datos de registro</p>
+        <p>Tus datos personales</p>
       </div>
-      <div class="perfil-placeholder">
-        <i class="fa-solid fa-user-gear"></i>
-        <p>Información del alumno próximamente</p>
-      </div>
+      <div id="perfilContent"></div>
     </section>
 
   </main>
@@ -89,7 +84,13 @@ $semestre = (int)$_SESSION['semestre'];
 </div>
 
 <script>
-  const USER_SEMESTRE = <?= $semestre ?>;
+  const USER_DATA = {
+    nombre: "<?= htmlspecialchars($_SESSION['nombre']) ?>",
+    apellidop: "<?= htmlspecialchars($_SESSION['apellidop']) ?>",
+    apellidom: "<?= htmlspecialchars($_SESSION['apellidom'] ?? '') ?>",
+    matricula: "<?= htmlspecialchars($_SESSION['matricula']) ?>",
+    semestre: <?= $semestre ?>
+  };
 </script>
 <script src="assets/js/dashboard.js"></script>
 </body>
