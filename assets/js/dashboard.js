@@ -117,9 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <h3><i class="fa-solid fa-id-card"></i> Datos personales</h3>
           <div class="datos-row"><span class="datos-label">Matrícula</span><span class="datos-value">${USER_DATA.matricula}</span></div>
           <div class="datos-row"><span class="datos-label">Nombre</span><span class="datos-value">${USER_DATA.nombre} ${USER_DATA.apellidop} ${USER_DATA.apellidom}</span></div>
-          <div class="datos-row"><span class="datos-label">Correo institucional</span><span class="datos-value">correo@uanl.edu.mx</span></div>
-          <div class="datos-row"><span class="datos-label">Correo personal</span><span class="datos-value" id="perfilCorreoPersonal">correo@gmail.com</span></div>
-          <div class="datos-row"><span class="datos-label">Celular</span><span class="datos-value" id="perfilCelular">1234567890</span></div>
+          <div class="datos-row"><span class="datos-label">Correo institucional</span><span class="datos-value">${USER_DATA.institutional_email}</span></div>
+          <div class="datos-row"><span class="datos-label">Correo personal</span><span class="datos-value" id="perfilCorreoPersonal">${USER_DATA.personal_email || ''}</span></div>
+          <div class="datos-row"><span class="datos-label">Celular</span><span class="datos-value" id="perfilCelular">${USER_DATA.cell}</span></div>
           <div class="datos-row"><span class="datos-label">Semestre</span><span class="datos-value">${USER_DATA.semestre}°</span></div>
         </div>
 
@@ -140,14 +140,14 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="edit-field">
             <label>Correo personal</label>
             <div class="edit-input-group">
-              <input type="email" id="editEmail" value="correo@gmail.com">
+              <input type="email" id="editEmail" value="${USER_DATA.personal_email || ''}">
               <button class="edit-save-btn" id="saveEmail"><i class="fa-solid fa-check"></i></button>
             </div>
           </div>
           <div class="edit-field">
             <label>Celular</label>
             <div class="edit-input-group">
-              <input type="tel" id="editCell" value="1234567890" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+              <input type="tel" id="editCell" value="${USER_DATA.cell}" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
               <button class="edit-save-btn" id="saveCell"><i class="fa-solid fa-check"></i></button>
             </div>
           </div>
@@ -175,36 +175,68 @@ document.addEventListener("DOMContentLoaded", () => {
         : "No recibirás recordatorios por correo.";
     });
 
-    document.getElementById("saveEmail").addEventListener("click", () => {
+    document.getElementById("saveEmail").addEventListener("click", async () => {
       const val = document.getElementById("editEmail").value.trim();
       if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
         showEditFeedback("Ingresa un correo válido", "error");
         return;
       }
-      document.getElementById("perfilCorreoPersonal").textContent = val;
-      showEditFeedback("Correo actualizado", "ok");
+      const res = await fetch("controllers/actualizar_perfil.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ campo: "personal_email", valor: val })
+      });
+      const data = await res.json();
+      if (data.success) {
+        USER_DATA.personal_email = val;
+        document.getElementById("perfilCorreoPersonal").textContent = val;
+        showEditFeedback("Correo actualizado", "ok");
+      } else {
+        showEditFeedback(data.message || "Error al actualizar", "error");
+      }
     });
 
-    document.getElementById("saveCell").addEventListener("click", () => {
+    document.getElementById("saveCell").addEventListener("click", async () => {
       const val = document.getElementById("editCell").value;
       if (val.length !== 10) {
         showEditFeedback("El celular debe tener 10 dígitos", "error");
         return;
       }
-      document.getElementById("perfilCelular").textContent = val;
-      showEditFeedback("Celular actualizado", "ok");
+      const res = await fetch("controllers/actualizar_perfil.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ campo: "cell", valor: val })
+      });
+      const data = await res.json();
+      if (data.success) {
+        USER_DATA.cell = val;
+        document.getElementById("perfilCelular").textContent = val;
+        showEditFeedback("Celular actualizado", "ok");
+      } else {
+        showEditFeedback(data.message || "Error al actualizar", "error");
+      }
     });
 
-    document.getElementById("saveSemestre").addEventListener("click", () => {
+    document.getElementById("saveSemestre").addEventListener("click", async () => {
       const val = parseInt(document.getElementById("editSemestre").value);
-      USER_DATA.semestre = val;
-      document.querySelectorAll(".datos-row").forEach(row => {
-        if (row.querySelector(".datos-label")?.textContent === "Semestre") {
-          row.querySelector(".datos-value").textContent = val + "°";
-        }
+      const res = await fetch("controllers/actualizar_perfil.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ campo: "semestre", valor: val })
       });
-      document.querySelector(".dash-semestre").textContent = "Semestre " + val;
-      showEditFeedback("Semestre actualizado", "ok");
+      const data = await res.json();
+      if (data.success) {
+        USER_DATA.semestre = val;
+        document.querySelectorAll(".datos-row").forEach(row => {
+          if (row.querySelector(".datos-label")?.textContent === "Semestre") {
+            row.querySelector(".datos-value").textContent = val + "°";
+          }
+        });
+        document.querySelector(".dash-semestre").textContent = "Semestre " + val;
+        showEditFeedback("Semestre actualizado", "ok");
+      } else {
+        showEditFeedback(data.message || "Error al actualizar", "error");
+      }
     });
   }
 

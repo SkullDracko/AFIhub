@@ -89,6 +89,9 @@ $semestre = (int)$_SESSION['semestre'];
     apellidop: "<?= htmlspecialchars($_SESSION['apellidop']) ?>",
     apellidom: "<?= htmlspecialchars($_SESSION['apellidom'] ?? '') ?>",
     matricula: "<?= htmlspecialchars($_SESSION['matricula']) ?>",
+    institutional_email: "<?= htmlspecialchars($_SESSION['institutional_email'] ?? '') ?>",
+    personal_email: "<?= htmlspecialchars($_SESSION['personal_email'] ?? '') ?>",
+    cell: "<?= htmlspecialchars($_SESSION['cell'] ?? '') ?>",
     semestre: <?= $semestre ?>
   };
 </script>
