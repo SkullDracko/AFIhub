@@ -1,6 +1,15 @@
 CREATE DATABASE IF NOT EXISTS `afihub` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `afihub`;
 
+DROP TABLE IF EXISTS `resultados_afi_estudiante`;
+DROP TABLE IF EXISTS `resultados_afi_encuesta`;
+DROP TABLE IF EXISTS `tests`;
+DROP TABLE IF EXISTS `afis_materia`;
+DROP TABLE IF EXISTS `afis`;
+DROP TABLE IF EXISTS `materias`;
+DROP TABLE IF EXISTS `semestres`;
+DROP TABLE IF EXISTS `usuarios`;
+
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` varchar(20) NOT NULL,
